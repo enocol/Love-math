@@ -182,8 +182,8 @@ body {
 .btn--big::after {
     content: attr(data-type);
     position: relative;
-    top: -0.5rem;
-    left: -0.8rem;
+    top: -0.2rem;
+    left: -0.5rem;
     font-size: 0.8rem;
 }
 
