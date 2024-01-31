@@ -11,3 +11,8 @@ document.addEventListener("DOMContentLoaded", function(){
         });
     }
 });
+
+function runGame() {
+  const num1 = Math.floor(Math.random() * 25) + 1;
+  const num2 = Math.floor(Math.random() * 25) + 1; 
+}
