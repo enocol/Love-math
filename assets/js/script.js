@@ -3,7 +3,12 @@ document.addEventListener("DOMContentLoaded", function(){
     for (let button of buttons) {
         button.addEventListener("click", function() {
            if (this.getAttribute("data-type") === "submit") {
+                if (document.getElementById("answer-box").value === "") {
+                    alert("Please enter your answer");
+                    return;
+                }
                checkAnswer();
+
            } else {
                const gameType = this.getAttribute("data-type");
               runGame(gameType);
@@ -33,20 +38,20 @@ function displayAdditionQuestion(num1, num2) {
 }
 
 function displayMultiplyQuestion(num1, num2) {
-    document.getElementById("operand1").textContent = num1 > num2 ? num1 : num2;
-    document.getElementById("operand2").textContent = num2 < num1 ? num2 : num1;
+    document.getElementById("operand1").textContent = num1
+    document.getElementById("operand2").textContent = num2
     document.getElementById("operator").textContent = "x";
 }
 
 function displaySubtractQuestion(num1, num2) { 
-    document.getElementById("operand1").textContent = num1;
-    document.getElementById("operand2").textContent = num2
+    document.getElementById("operand1").textContent = num1 > num2 ? num1 : num2;
+    document.getElementById("operand2").textContent = num2 < num1 ? num2 : num1;
     document.getElementById("operator").textContent = "-";
 }
 
 function displayDivisionQuestion(num1, num2) {
-    document.getElementById("operand1").textContent = num1 * num2;
-    document.getElementById("operand2").textContent = num2;
+    document.getElementById("operand1").textContent = num1 > num2 ? num1 : num2;
+    document.getElementById("operand2").textContent = num2 < num1 ? num2 : num1;
     document.getElementById("operator").textContent = "/";
 }
 
@@ -57,11 +62,14 @@ function checkAnswer() {
     const operator = document.getElementById("operator").innerText;
     const answer = calculateAnswer(num1, num2, operator);
     
+    
     if (userAnswer === answer) {
         alert("Correct!");
     } else {
         alert(`Wrong! The correct answer was ${answer}`);
     }
+
+    resetAnswer()
 }
 
 function calculateAnswer(firstNumber, secondNumber, operator) {
@@ -83,4 +91,9 @@ function calculateAnswer(firstNumber, secondNumber, operator) {
     }
  return answer;
  
+}
+
+function resetAnswer() {
+    const userAnswer1 = document.getElementById("answer-box");
+    userAnswer1.value = "";
 }
